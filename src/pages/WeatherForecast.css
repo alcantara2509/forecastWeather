@@ -1,0 +1,52 @@
+.weather-container {
+  background-image: url('../images/earth.png');
+  background-repeat: no-repeat;
+  height: 600px;
+  width: 600px;
+}
+
+.weather-capital {
+  background-color: #1e1e1e91;
+  color: whitesmoke;
+  height: 20px;
+  padding: 8px;
+  width: fit-content;
+}
+
+.current-weather {
+  background-color: whitesmoke;
+  color: #1e1e1e;
+  width: fit-content;
+}
+
+.weather-capital-container {
+  display: flex;
+}
+
+#brasilia {
+  left: 41.5%;
+  position: absolute;
+  top: 58%;
+}
+#london {
+  left: 50.5%;
+  position: absolute;
+  top: 29%;
+}
+
+#washington {
+  left: 36%;
+  position: absolute;
+  top: 37%;
+}
+
+#joanesburgo {
+  left: 54%;
+  position: absolute;
+  top: 63.3%;
+}
+
+.weather-icon {
+  padding: 0 2px;
+  width: 32px;
+}
