@@ -24,6 +24,76 @@ E vale lembrar que o Redux, em conjunto com o React, é uma das ferramentas de g
 # Conteúdos 
 #### *tempo sugerido para realização: 30 minutos*
 
+## O que você precisa para começar?
+
+Primeiramente, vamos criar uma aplicação React.
+
+```js
+npx create-react-app my-app
+```
+
+Agora, vamos instalar as dependências do Redux.
+
+```js
+npm install --save redux react-redux
+```
+
+O React Redux é uma biblioteca que faz a conexão entre o React e o Redux.
+
+
+## Fluxo de dados no Redux
+
+Você sabe todas as etapas do Redux? No infográfico abaixo, mostramos como funciona o fluxo de dados nessa ferramenta.
+
+[Infográfico]
+
+Para começar, precisamos criar um Store. Ele é uma nuvem que armazena todos os estados da aplicação.
+
+```js
+import { createStore } from 'redux';
+
+const store = createStore();
+
+export default store;
+```
+
+Depois, vamos configurar o Provider. É ele que vai disponibilizar as informações contidas na Store para os outros componentes.
+
+No arquivo `App.js`
+
+```js
+import React from 'react';
+// o provider é o meio pelo qual disponibilizamos o Store
+import { Provider } from 'react-redux';
+import store from './store';
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Provider store={store}>
+          // componentes aqui
+        </Provider>
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+Agora, vamos criar um novo componente.
+
+```js
+
+```
+
+O próximo passo é criar uma Action - um objeto JavaScript derivado de uma interação do usuário que deve ser atualizado no estado.
+
+```js
+export const addAssignment = (value) => ({type: 'ADD_ELEMENT', value });
+```
+
 # Exercícios 
 #### *tempo sugerido para realização: 60 minutos*
 
