@@ -15,9 +15,11 @@ Implementar seus conhecimentos em **Redux** no **React**:
 
 # Por que isso é importante?
 
-Como vimos anteriormente, o Redux é uma ferramenta excelente para armazenar os estados da aplicação e utilizá-los apenas onde for necessário. Ele deixa mais claro onde cada informação está, evitando erros e a famosa ***props drilling***, tornando o código mais limpo, legível e escalável.
+Como vimos anteriormente, o Redux é uma ferramenta excelente para armazenar os estados da aplicação e utilizá-los apenas onde for necessário.
 
-Além disso, vale lembrar que o Redux, em conjunto com o React, é uma das ferramentas de gerenciamento de estado mais utilizadas no mercado de trabalho. 
+Ele deixa mais claro onde cada informação está, evitando erros e o famoso ***prop drilling***. Além disso, ele torna o código mais limpo, legível e escalável.
+
+E vale lembrar que o Redux, em conjunto com o React, é uma das ferramentas de gerenciamento de estado mais utilizadas no mercado de trabalho. 
 
 # Conteúdos 
 #### *tempo sugerido para realização: 30 minutos*
