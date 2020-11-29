@@ -1,24 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import rainy from '../images/rainy.svg';
 import sunny from '../images/sunny.svg';
-import cloudy from '../images/cloudy.svg';
+// import rainy from '../images/rainy.svg';
+// import cloudy from '../images/cloudy.svg';
 
 class London extends Component {
-  handleIconsWeather() {
-    const { london } = this.props;
-    if (london === 'sunny') {
-      return sunny;
-    }
-    if (london === 'rainy') {
-      return rainy;
-    }
-    if (london === 'cloudy') {
-      return cloudy;
-    }
-  }
-
   render() {
     return (
       <div className="weather-capital-container" id="london">
@@ -27,7 +13,7 @@ class London extends Component {
         </div>
         <div className="current-weather">
           <img
-            src={ this.handleIconsWeather() }
+            src={ sunny }
             alt="weather icon"
             className="weather-icon"
           />
@@ -37,12 +23,8 @@ class London extends Component {
   }
 }
 
-const mapStateToProps = ({ london }) => ({
-  london,
-});
-
 London.propTypes = {
   london: PropTypes.string,
 }.isRequired;
 
-export default connect(mapStateToProps, null)(London);
+export default London;
