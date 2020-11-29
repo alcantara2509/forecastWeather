@@ -37,8 +37,8 @@ class Washington extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  washington: state.weatherReducer.washington,
+const mapStateToProps = ({ washington }) => ({
+  washington,
 });
 
 Washington.propTypes = {

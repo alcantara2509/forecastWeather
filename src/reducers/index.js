@@ -1,6 +1,23 @@
-import { combineReducers } from 'redux';
-import weatherReducer from './weatherReducer';
+import { CURR_WEATHER } from '../actions';
 
-const rootReducer = combineReducers({ weatherReducer });
+const INITIAL_STATE = {
+  brasilia: '',
+  washington: '',
+  london: '',
+  joanesburgo: '',
+};
 
-export default rootReducer;
+function weatherReducer(state = INITIAL_STATE, action) {
+  switch (action.type) {
+  case CURR_WEATHER:
+    return { ...state,
+      brasilia: action.brasilia,
+      washington: action.washington,
+      london: action.london,
+      joanesburgo: action.joanesburgo };
+  default:
+    return state;
+  }
+}
+
+export default weatherReducer;

@@ -37,8 +37,8 @@ class Joanesburgo extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  joanesburgo: state.weatherReducer.joanesburgo,
+const mapStateToProps = ({ joanesburgo }) => ({
+  joanesburgo,
 });
 
 Joanesburgo.propTypes = {
