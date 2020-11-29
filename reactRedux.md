@@ -94,6 +94,32 @@ O próximo passo é criar uma Action - um objeto JavaScript derivado de uma inte
 export const addAssignment = (value) => ({type: 'ADD_ELEMENT', value });
 ```
 
+Uma vez que a Action foi realizada, precisamos criar um Reducer para receber essa ação e retornar um novo estado.
+
+```js
+const INITIAL_STATE = [];
+
+function listReducer(state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case 'ADD_ELEMENT':
+      return [...state, action.value];
+    default:
+      return state;
+  }
+}
+
+export default listReducer;
+```
+
+Esses dados filtrados pelo Reducer precisam ser enviados para o Store através do Dispatch.
+
+```js
+const mapDispatchToProps = dispatch => ({
+  add: e => dispatch(addAssignment(e))});
+```
+
+
+
 # Exercícios 
 #### *tempo sugerido para realização: 60 minutos*
 
