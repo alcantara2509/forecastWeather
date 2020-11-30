@@ -82,7 +82,7 @@ class App extends React.Component {
     return (
       <div>
         <Provider store={store}>
-          // componentes aqui
+          {/* componentes aqui */}
         </Provider>
       </div>
     );
