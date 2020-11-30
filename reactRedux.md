@@ -97,6 +97,75 @@ Agora, vamos criar um novo componente.
 - Na pasta `/src`, crie um novo arquivo `Calculator.js`
 
 ```js
+import React, { Component } from 'react';
+
+class Calculator extends Component {
+  constructor() {
+    super()
+
+    this.handleChangeOne = this.handleChangeOne.bind(this)
+    this.handleChangeTwo = this.handleChangeTwo.bind(this)
+    this.handleClickSum = this.handleClickSum.bind(this)
+    this.handleClickSub = this.handleClickSub.bind(this)
+    this.handleClickMult = this.handleClickMult.bind(this)
+    this.handleClickDiv = this.handleClickDiv.bind(this)
+
+    this.state = {
+      numberOne: 0,
+      numberTwo: 0,
+      result: 0,
+    }
+  }
+
+  handleChangeOne({ target }) {
+    this.setState({ numberOne: target.value })
+  };
+
+  handleChangeTwo({ target }) {
+    this.setState({ numberTwo: target.value})
+  };
+
+  handleClickSum() {
+    const { numberOne, numberTwo } = this.state;
+    const result = parseInt(numberOne) + parseInt(numberTwo)
+    this.setState({ result: result })
+  };
+
+  handleClickSub() {
+    const { numberOne, numberTwo } = this.state;
+    const result = parseInt(numberOne) - parseInt(numberTwo)
+    this.setState({ result: result })
+  };
+  
+  handleClickMult() {
+    const { numberOne, numberTwo } = this.state;
+    const result = parseInt(numberOne) * parseInt(numberTwo)
+    this.setState({ result: result })
+  };
+
+  handleClickDiv() {
+    const { numberOne, numberTwo } = this.state;
+    const result = parseInt(numberOne) / parseInt(numberTwo)
+    this.setState({ result: result })
+  };
+
+  render() {
+    const {result} = this.state;
+    return (
+      <>
+        <input type="number" onChange={ this.handleChangeOne } value={this.numberOne} />
+        <input type="number" onChange={ this.handleChangeTwo } value={this.numberOne} />
+        <button type="button" onClick={ this.handleClickSum }>Somar</button>
+        <button type="button" onClick={ this.handleClickSub }>Subtrair</button>
+        <button type="button" onClick={ this.handleClickMult }>Multiplicar</button>
+        <button type="button" onClick={ this.handleClickDiv }>Dividir</button>
+        <h1>{ result }</h1>
+      </>
+    )
+  }
+}
+
+export default Calculator;
 
 ```
 
@@ -138,6 +207,10 @@ const mapDispatchToProps = dispatch => ({
 ```
 
 Por fim, precisamos linkar o React com o Redux através do Connect.
+
+```js
+export default connect(mapStateToProps, mapDispatchToProps)(Calculator);
+```
 
 
 # Exercícios 
