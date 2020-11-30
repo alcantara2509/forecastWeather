@@ -51,9 +51,9 @@ Para começar, precisamos criar um Store. Ele é um grande objeto JavaScript que
 
 Crie um novo arquivo dentro do `/src` com o nome `store.js`.
 
-- Importe a função `createStore` do Redux.
-- Em seguida, crie uma constante `store` que recebe a função `createStore`.
-- Agora, exporte a `store`.
+- Importe a função `createStore` do Redux
+- Em seguida, crie uma constante `store` que recebe a função `createStore`
+- Agora, exporte a `store`
 
 ```js
 import { createStore } from 'redux';
@@ -69,8 +69,8 @@ No arquivo `App.js`, faça as seguintes alterações:
 
 - Importe o método `Provider` do *react-redux*
 - Importe a `store`
-- Inclua a tag `Provider` envolvendo todos os componentes que receberão as informações.
-- A tag `Provider` recebe o `store` como ***parâmetro***.
+- Inclua a tag `Provider` envolvendo todos os componentes que receberão as informações
+- A tag `Provider` recebe o `store` como ***parâmetro***
 
 ```js
 import React from 'react';
@@ -94,11 +94,13 @@ export default App;
 
 Agora, vamos criar um novo componente.
 
+- Na pasta `/src`, crie um novo arquivo `Calculator.js`
+
 ```js
 
 ```
 
-Depois de criar o componente, é preciso criar um método para buscar a informação do estado e trazer para o componente via Props. Esse método é o mapStateToProps.
+Depois de criar o componente, é preciso criar um método para buscar a informação do estado e trazer para o componente via Props. Esse método é o `mapStateToProps`.
 
 ```js
 const mapStateToProps = state => ({
@@ -135,6 +137,7 @@ const mapDispatchToProps = dispatch => ({
   add: e => dispatch(addAssignment(e))});
 ```
 
+Por fim, precisamos linkar o React com o Redux através do Connect.
 
 
 # Exercícios 
