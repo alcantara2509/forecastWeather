@@ -50,3 +50,53 @@
   padding: 0 2px;
   width: 32px;
 }
+
+@media only screen and (min-width: 1440px) {
+  #brasilia {
+    left: 43%;
+    position: absolute;
+    top: 58%;
+  }
+  #london {
+    left: 50.5%;
+    position: absolute;
+    top: 30%;
+  }
+  
+  #washington {
+    left: 35%;
+    position: absolute;
+    top: 37%;
+  }
+  
+  #joanesburgo {
+    left: 53.5%;
+    position: absolute;
+    top: 62%;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  #brasilia {
+    left: 44%;
+    position: absolute;
+    top: 56%;
+  }
+  #london {
+    left: 50.5%;
+    position: absolute;
+    top: 36%;
+  }
+  
+  #washington {
+    left: 39%;
+    position: absolute;
+    top: 41%;
+  }
+  
+  #joanesburgo {
+    left: 53%;
+    position: absolute;
+    top: 59%;
+  }
+}

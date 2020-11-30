@@ -468,3 +468,9 @@ Antes de começar, clone [esse repositório](https://github.com/alcantara2509/fo
 - Nesse exercício você deverá refatorar os componentes das cidades, para que eles busquem as informações de clima no estado do Redux.
 
 - Os arquivos a serem alterados nesse exercício são: `Brasilia.js, Joanesburgo.js, London.js, Washington.js` na pasta `/components`.
+
+# Recursos Adicionais 
+
+- [Redux Fundamentals](https://redux.js.org/tutorials/fundamentals/part-5-ui-react)
+- [Entendendo React e Redux de uma vez por todas](https://medium.com/@hliojnior_34681/entenda-react-e-redux-de-uma-vez-por-todas-c761bc3194ca)
+- [Entenda REDUX em UM VÍDEO](https://www.youtube.com/watch?v=J0g1cv_03XQ)

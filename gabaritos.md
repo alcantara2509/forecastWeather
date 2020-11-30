@@ -10,9 +10,11 @@ Carregar a aplicação (`npm start`)
 
 ### Exercício 1 - Previsão do tempo
 
-- Nesse exercício você irá receber informações do clima de quatro cidades via props e deverá retornar corretamente o ícone correspondente. Exemplo: Se for "sunny" deve retornar o icone "sunny.svg".
+- Nesse exercício você irá receber informações do clima de quatro cidades via *props* e deverá retornar corretamente o ícone correspondente.
 
-- Os arquivos a serem alterados nesse exercício são: `Brasilia.js, Joanesburgo.js, London.js, Washington.js` na pasta `/components`.
+  Exemplo: Se for "sunny”, deve retornar o icone "sunny.svg".
+
+- Os arquivos a serem alterados nesse exercício são: `Brasilia.js, Joanesburgo.js, London.js` e `Washington.js` na pasta `/components`.
 
 ``` js
 // src/components/Brasilia.js
@@ -66,7 +68,7 @@ export default Brasilia;
 
 ### Exercício 2 - Configurando o Redux
 
-- Nesse exercíco você deverá refatorar o arquivo `src/pages/WeatherForecast.js` de modo que ele envie as informações de clima do estado do componente para o estado do redux.
+- Nesse exercício você deverá refatorar o arquivo `src/pages/WeatherForecast.js` de modo que ele envie as informações de clima do estado do componente para o estado do redux.
 
 - Implemente o ***store*** no arquivo `src/store/index.js`, a ***action*** no arquivo `src/action/index.js`, o ***reducer*** no arquivo `src/reducers/index.js`, o ***dispacth*** e o ***connect*** no arquivo `src/pages/WeatherForecast.js`.
 
@@ -181,7 +183,7 @@ export default connect(null, mapDispatchToProps)(WeatherForecast);
 
 ### Exercício 3 - Utilizando o State
 
-- Nesse exercício você deverá refatorar os componentes das cidades para que eles busquem as informações de clima do estado do redux.
+- Nesse exercício você deverá refatorar os componentes das cidades, para que eles busquem as informações de clima no estado do Redux.
 
 - Os arquivos a serem alterados nesse exercício são: `Brasilia.js, Joanesburgo.js, London.js, Washington.js` na pasta `/components`.
 
