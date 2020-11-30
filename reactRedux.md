@@ -15,9 +15,7 @@ Implementar seus conhecimentos em **Redux** no **React**:
 
 # Por que isso é importante?
 
-Como vimos anteriormente, o Redux é uma ferramenta excelente para armazenar os estados da aplicação e utilizá-los apenas onde for necessário.
-
-Ele deixa mais claro onde cada informação está, evitando erros e o famoso ***prop drilling***. Além disso, ele torna o código mais limpo, legível e escalável.
+Como vimos anteriormente, o Redux é uma ferramenta excelente para armazenar os estados da aplicação e utilizá-los apenas onde for necessário. Ele deixa mais claro onde cada informação está, evitando erros e o famoso ***prop drilling***. Além disso, ele torna o código mais limpo, legível e escalável.
 
 E vale lembrar que o Redux, em conjunto com o React, é uma das ferramentas de gerenciamento de estado mais utilizadas no mercado de trabalho. 
 
@@ -30,12 +28,14 @@ Primeiramente, vamos criar uma aplicação React.
 
 ```js
 npx create-react-app my-app
+
 ```
 
 Agora, vamos instalar as dependências do Redux.
 
 ```js
 npm install --save redux react-redux
+
 ```
 
 O React Redux é uma biblioteca que faz a conexão entre o React e o Redux.
@@ -62,6 +62,7 @@ import resultReducer from './reducer'
 const store = createStore(resultReducer);
 
 export default store;
+
 ```
 
 Depois, vamos configurar o Provider. É ele que vai disponibilizar as informações contidas na Store para os outros componentes.
@@ -92,6 +93,7 @@ class App extends React.Component {
 }
 
 export default App;
+
 ```
 
 Agora, vamos criar dois novos componentes.
@@ -189,9 +191,10 @@ const mapStateToProps = (state) => ({ result: state.result });
 ```
 
 O próximo passo é criar uma Action - um objeto JavaScript derivado de uma interação do usuário que deve ser atualizado no estado.
+
 - Crie um novo arquivo `action.js`
-- Por convenção, a action recebe uma chave `type`. Mas pode também receber quantas chaves forem necessárias.
-- Inclua a chave `result` com o valor `result`.
+- Por convenção, a action recebe uma chave `type`. Não obstante, ela também pode receber quantas chaves forem necessárias
+- Inclua a chave `result` com o valor `result`
 
 ```js
 export const SEND_RESULT = 'SEND_RESULT';
@@ -204,8 +207,9 @@ export const sendResult = (result) => ({
 ```
 
 Uma vez que a Action foi realizada, precisamos criar um Reducer para receber essa ação e retornar um novo estado.
-- Crie uma função que recebe como parâmetro um estado inicial e uma action.
-- A função deve verificar se o reducer recebeu uma action. Caso positivo, retorna um novo estado com as informações recebidas. Caso negativo, retorna o estado.
+
+- Crie uma função que recebe como parâmetro um estado inicial e uma Action
+- A função deve verificar se o Reducer recebeu uma Action. Caso positivo, retorna um novo estado com as informações recebidas. Caso negativo, retorna o estado
 
 ```js
 import { SEND_RESULT } from './action.js'
@@ -226,8 +230,9 @@ export default resultReducer;
 ```
 
 Esses dados filtrados pelo Reducer precisam ser enviados para o Store através do Dispatch.
-- No arquivo `Calculator.js` crie a função `mapDispatchToProps()` logo antes do export.
-- A função recebe como parâmetro um `dispatch` e retorna um objeto cujo valor é uma callback.
+
+- No arquivo `Calculator.js` crie a função `mapDispatchToProps()` logo antes do export
+- A função recebe como parâmetro um `dispatch` e retorna um objeto cujo valor é uma callback
 
 ```js
 const mapDispatchToProps = (dispatch) => ({
@@ -240,7 +245,7 @@ export default Calculator;
 
 Agora precisamos criar a chamada da callback.
 
-- Na função de click no arquivo `Calculator.js`, insira a função que chama o dispatch.
+- Na função de click no arquivo `Calculator.js`, insira a função que chama o dispatch
 
 ```js
 handleClick() {
@@ -254,17 +259,18 @@ handleClick() {
   
 ```
 
-Por fim, precisamos linkar o React com o Redux através do Connect.
+Por fim, precisamos vincular o React com o Redux através do Connect.
 
 - A sintaxe do *connect* segue o seguinte padrão:
   `connect()();`
-- O primeiro parênteses recebe as funções mapStateToProps e mapDispatchToProps. Caso tenha sido utilizada apenas uma coloque null no lugar da outra.
-- No arquivo `Calculator.js` insira o connect com apenas o mapDispatchToProps.
-- No arquivo `Result.js` insira o connect com apenas o mapStateToProps.
-- Lembre-se de importar o connect do `'react-redux'`.
+- O primeiro parênteses recebe as funções `mapStateToProps` e `mapDispatchToProps`. Caso tenha sido utilizada apenas uma delas, coloque `null` no lugar da outra
+- No arquivo `Calculator.js`, insira o `connect` com apenas o `mapDispatchToProps`
+- No arquivo `Result.js`, insira o `connect` com apenas o `mapStateToProps`
+- Lembre-se de importar o connect do `'react-redux'`
 
 ```js
 // src/Calculator.js
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Result from './Result';
@@ -347,8 +353,14 @@ class Result extends Component {
 const mapStateToProps = (state) => ({ result: state.result });
 
 export default connect(mapStateToProps, null)(Result);
+
 ```
 
+Ao final de todas essas etapas, seu código deve ficar assim:
+
+```js
+
+```
 
 # Exercícios 
 #### *tempo sugerido para realização: 60 minutos*
