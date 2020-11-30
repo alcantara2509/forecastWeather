@@ -49,6 +49,12 @@ Você sabe todas as etapas do Redux? No infográfico abaixo, mostramos como func
 
 Para começar, precisamos criar um Store. Ele é um grande objeto JavaScript que armazena todos os estados da aplicação.
 
+Crie um novo arquivo dentro do `/src` com o nome `store.js`.
+
+- Importe a função `createStore` do Redux.
+- Em seguida, crie uma constante `store` que recebe a função `createStore`.
+- Agora, exporte a `store`.
+
 ```js
 import { createStore } from 'redux';
 
@@ -59,7 +65,9 @@ export default store;
 
 Depois, vamos configurar o Provider. É ele que vai disponibilizar as informações contidas na Store para os outros componentes.
 
-No arquivo `App.js`
+No arquivo `App.js`, faça as seguintes alterações:
+
+- Inclua a tag `Provider` envolvendo todos os componentes que receberão as informações.
 
 ```js
 import React from 'react';
