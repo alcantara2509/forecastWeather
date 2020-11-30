@@ -72,7 +72,7 @@ No arquivo `App.js`, faça as seguintes alterações:
 - Importe o método `Provider` do *react-redux*
 - Importe a `store`
 - Inclua a tag `Provider` envolvendo todos os componentes que receberão as informações
-- A tag `Provider` recebe o `store` como ***parâmetro***
+- A tag `Provider` recebe a propriedade `store`
 
 ```js
 import React from 'react';
