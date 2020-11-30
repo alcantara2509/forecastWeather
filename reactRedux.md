@@ -67,11 +67,13 @@ Depois, vamos configurar o Provider. É ele que vai disponibilizar as informaç�
 
 No arquivo `App.js`, faça as seguintes alterações:
 
+- Importe o método `Provider` do *react-redux*
+- Importe a Store
 - Inclua a tag `Provider` envolvendo todos os componentes que receberão as informações.
+- A tag `Provider` recebe o Store como ***parâmetro***.
 
 ```js
 import React from 'react';
-// o provider é o meio pelo qual disponibilizamos o Store
 import { Provider } from 'react-redux';
 import store from './store';
 
