@@ -57,8 +57,9 @@ Crie um novo arquivo dentro do `/src` com o nome `store.js`.
 
 ```js
 import { createStore } from 'redux';
+import resultReducer from './reducer'
 
-const store = createStore();
+const store = createStore(resultReducer);
 
 export default store;
 ```
@@ -74,6 +75,7 @@ No arquivo `App.js`, faça as seguintes alterações:
 
 ```js
 import React from 'react';
+import Calculator from './Calculator';
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -82,7 +84,7 @@ class App extends React.Component {
     return (
       <div>
         <Provider store={store}>
-          {/* componentes aqui */}
+          <Calculator />
         </Provider>
       </div>
     );
@@ -92,23 +94,22 @@ class App extends React.Component {
 export default App;
 ```
 
-Agora, vamos criar um novo componente.
+Agora, vamos criar dois novos componentes.
 
-- Na pasta `/src`, crie um novo arquivo `Calculator.js`
+- Na pasta `/src`, crie um arquivo `Calculator.js` e outro `Result.js`
 
 ```js
+// src/Calculator.js
+
 import React, { Component } from 'react';
+import Result from './Result';
 
 class Calculator extends Component {
   constructor() {
     super()
 
-    this.handleChangeOne = this.handleChangeOne.bind(this)
-    this.handleChangeTwo = this.handleChangeTwo.bind(this)
-    this.handleClickSum = this.handleClickSum.bind(this)
-    this.handleClickSub = this.handleClickSub.bind(this)
-    this.handleClickMult = this.handleClickMult.bind(this)
-    this.handleClickDiv = this.handleClickDiv.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
 
     this.state = {
       numberOne: 0,
@@ -117,49 +118,37 @@ class Calculator extends Component {
     }
   }
 
-  handleChangeOne({ target }) {
-    this.setState({ numberOne: target.value })
+  handleChange({ target }) {
+    const { name, value } = target; 
+    this.setState({ [name]: value })
   };
 
-  handleChangeTwo({ target }) {
-    this.setState({ numberTwo: target.value})
-  };
-
-  handleClickSum() {
+  handleClick() {
     const { numberOne, numberTwo } = this.state;
     const result = parseInt(numberOne) + parseInt(numberTwo)
     this.setState({ result: result })
-  };
 
-  handleClickSub() {
-    const { numberOne, numberTwo } = this.state;
-    const result = parseInt(numberOne) - parseInt(numberTwo)
-    this.setState({ result: result })
-  };
-  
-  handleClickMult() {
-    const { numberOne, numberTwo } = this.state;
-    const result = parseInt(numberOne) * parseInt(numberTwo)
-    this.setState({ result: result })
-  };
-
-  handleClickDiv() {
-    const { numberOne, numberTwo } = this.state;
-    const result = parseInt(numberOne) / parseInt(numberTwo)
-    this.setState({ result: result })
+    const { dispatchResult } = this.props;
+    dispatchResult(result);
   };
 
   render() {
-    const {result} = this.state;
     return (
       <>
-        <input type="number" onChange={ this.handleChangeOne } value={this.numberOne} />
-        <input type="number" onChange={ this.handleChangeTwo } value={this.numberOne} />
-        <button type="button" onClick={ this.handleClickSum }>Somar</button>
-        <button type="button" onClick={ this.handleClickSub }>Subtrair</button>
-        <button type="button" onClick={ this.handleClickMult }>Multiplicar</button>
-        <button type="button" onClick={ this.handleClickDiv }>Dividir</button>
-        <h1>{ result }</h1>
+        <input
+          type="number"
+          onChange={ this.handleChange }
+          name="numberOne"
+          value={this.numberOne}
+        />
+        <input
+          type="number"
+          onChange={ this.handleChange }
+          name="numberTwo"
+          value={this.numberOne}
+        />
+        <button type="button" onClick={ this.handleClick }>Somar</button>
+        <Result />
       </>
     )
   }
@@ -169,47 +158,195 @@ export default Calculator;
 
 ```
 
+```js
+// src/Result.js
+
+import React, { Component } from 'react';
+
+class Result extends Component {
+  render() {
+    const { result } = this.props
+    console.log(result);
+    return (
+      <>
+        <h1>{result}</h1>
+      </>
+    )
+  }
+}
+
+export default Result;
+
+```
+
 Depois de criar o componente, é preciso criar um método para buscar a informação do estado e trazer para o componente via Props. Esse método é o `mapStateToProps`.
 
+- No componente `Result.js` crie a função `mapStateToProps()`, que recebe como parâmetro o estado e retorna a informação desejada.
+
 ```js
-const mapStateToProps = state => ({
-  list: state.listReducer});
+const mapStateToProps = (state) => ({ result: state.result });
+
 ```
 
 O próximo passo é criar uma Action - um objeto JavaScript derivado de uma interação do usuário que deve ser atualizado no estado.
+- Crie um novo arquivo `action.js`
+- Por convenção, a action recebe uma chave `type`. Mas pode também receber quantas chaves forem necessárias.
+- Inclua a chave `result` com o valor `result`.
 
 ```js
-export const addAssignment = (value) => ({type: 'ADD_ELEMENT', value });
+export const SEND_RESULT = 'SEND_RESULT';
+
+export const sendResult = (result) => ({
+  type: SEND_RESULT,
+  result,
+});
+
 ```
 
 Uma vez que a Action foi realizada, precisamos criar um Reducer para receber essa ação e retornar um novo estado.
+- Crie uma função que recebe como parâmetro um estado inicial e uma action.
+- A função deve verificar se o reducer recebeu uma action. Caso positivo, retorna um novo estado com as informações recebidas. Caso negativo, retorna o estado.
 
 ```js
-const INITIAL_STATE = [];
+import { SEND_RESULT } from './action.js'
 
-function listReducer(state = INITIAL_STATE, action) {
+const INITIAL_STATE = { result: 0, };
+
+function resultReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case 'ADD_ELEMENT':
-      return [...state, action.value];
+    case SEND_RESULT:
+      return {...state, result: action.result};
     default:
       return state;
   }
 }
 
-export default listReducer;
+export default resultReducer;
+
 ```
 
 Esses dados filtrados pelo Reducer precisam ser enviados para o Store através do Dispatch.
+- No arquivo `Calculator.js` crie a função `mapDispatchToProps()` logo antes do export.
+- A função recebe como parâmetro um `dispatch` e retorna um objeto cujo valor é uma callback.
 
 ```js
-const mapDispatchToProps = dispatch => ({
-  add: e => dispatch(addAssignment(e))});
+const mapDispatchToProps = (dispatch) => ({
+  dispatchResult: (result) => dispatch(sendResult(result)),
+});
+
+export default Calculator;
+
+```
+
+Agora precisamos criar a chamada da callback.
+
+- Na função de click no arquivo `Calculator.js`, insira a função que chama o dispatch.
+
+```js
+handleClick() {
+    const { numberOne, numberTwo } = this.state;
+    const result = parseInt(numberOne) + parseInt(numberTwo)
+    this.setState({ result: result })
+
+    const { dispatchResult } = this.props;
+    dispatchResult(result);
+  };
+  
 ```
 
 Por fim, precisamos linkar o React com o Redux através do Connect.
 
+- A sintaxe do *connect* segue o seguinte padrão:
+  `connect()();`
+- O primeiro parênteses recebe as funções mapStateToProps e mapDispatchToProps. Caso tenha sido utilizada apenas uma coloque null no lugar da outra.
+- No arquivo `Calculator.js` insira o connect com apenas o mapDispatchToProps.
+- No arquivo `Result.js` insira o connect com apenas o mapStateToProps.
+- Lembre-se de importar o connect do `'react-redux'`.
+
 ```js
-export default connect(mapStateToProps, mapDispatchToProps)(Calculator);
+// src/Calculator.js
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Result from './Result';
+import { sendResult } from './action'
+
+class Calculator extends Component {
+  constructor() {
+    super()
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+
+    this.state = {
+      numberOne: 0,
+      numberTwo: 0,
+      result: 0,
+    }
+  }
+
+  handleChange({ target }) {
+    const { name, value } = target; 
+    this.setState({ [name]: value })
+  };
+
+  handleClick() {
+    const { numberOne, numberTwo } = this.state;
+    const result = parseInt(numberOne) + parseInt(numberTwo)
+    this.setState({ result: result })
+
+    const { dispatchResult } = this.props;
+    dispatchResult(result);
+  };
+
+  render() {
+    return (
+      <>
+        <input
+          type="number"
+          onChange={ this.handleChange }
+          name="numberOne"
+          value={this.numberOne}
+        />
+        <input
+          type="number"
+          onChange={ this.handleChange }
+          name="numberTwo"
+          value={this.numberOne}
+        />
+        <button type="button" onClick={ this.handleClick }>Somar</button>
+        <Result />
+      </>
+    )
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatchResult: (result) => dispatch(sendResult(result)),
+});
+
+export default connect(null, mapDispatchToProps)(Calculator);
+
+```
+
+```js
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+class Result extends Component {
+  render() {
+    const { result } = this.props
+    console.log(result);
+    return (
+      <>
+        <h1>{result}</h1>
+      </>
+    )
+  }
+}
+
+const mapStateToProps = (state) => ({ result: state.result });
+
+export default connect(mapStateToProps, null)(Result);
 ```
 
 
