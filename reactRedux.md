@@ -47,7 +47,7 @@ Você sabe todas as etapas do Redux? No infográfico abaixo, mostramos como func
 
 [Infográfico]
 
-Para começar, precisamos criar um Store. Ele é uma nuvem que armazena todos os estados da aplicação.
+Para começar, precisamos criar um Store. Ele é um grande objeto JavaScript que armazena todos os estados da aplicação.
 
 ```js
 import { createStore } from 'redux';
@@ -86,6 +86,13 @@ Agora, vamos criar um novo componente.
 
 ```js
 
+```
+
+Depois de criar o componente, é preciso criar um método para buscar a informação do estado e trazer para o componente via Props. Esse método é o mapStateToProps.
+
+```js
+const mapStateToProps = state => ({
+  list: state.listReducer});
 ```
 
 O próximo passo é criar uma Action - um objeto JavaScript derivado de uma interação do usuário que deve ser atualizado no estado.
