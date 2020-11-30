@@ -27,7 +27,9 @@ Além disso, vale lembrar que o Redux, em conjunto com o React, é uma das ferra
 
 ## Agora a prática
 
-Você irá desenvolver um aplicativo web para previsão do tempo de algumas cidades importantes do mundo.
+Você irá desenvolver um aplicativo web para previsão do tempo de algumas cidades importantes do mundo. 
+
+Antes de começar, clone [esse repositório](https://github.com/alcantara2509/forecastWeather/).
 
 ### Exercício 1 - Previsão do tempo
 
