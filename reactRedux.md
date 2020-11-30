@@ -45,7 +45,7 @@ O React-Redux é uma biblioteca que faz a conexão entre o React e o Redux.
 
 Você sabe todas as etapas do Redux? No infográfico abaixo, mostramos como funciona o fluxo de dados nessa ferramenta.
 
-![Fluxo do Redux](https://raw.githubusercontent.com/alcantara2509/forecastWeather/master/src/images/earth.png)
+![Fluxo do Redux](https://raw.githubusercontent.com/alcantara2509/forecastWeather/master/infografico-redux.png)
 
 Para começar, precisamos criar um Store. Ele é um grande objeto JavaScript que armazena todos os estados da aplicação.
 
@@ -270,6 +270,112 @@ Por fim, precisamos vincular o React com o Redux através do Connect.
 
 ```js
 // src/Calculator.js
+export default connect(null, mapDispatchToProps)(Calculator);
+
+```
+
+```js
+// src/Result.js
+export default connect(mapStateToProps, null)(Result);
+
+```
+
+### Ao final de todas essas etapas, seu código deve ficar assim:
+
+```js
+// src/store.js
+
+import { createStore } from 'redux';
+import resultReducer from './reducer'
+
+const store = createStore(resultReducer);
+
+export default store;
+
+```
+
+```js
+// src/App.js
+
+import React from 'react';
+import Calculator from './Calculator';
+import { Provider } from 'react-redux';
+import store from './store';
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Provider store={store}>
+          <Calculator />
+        </Provider>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+```
+
+```js
+// src/Result.js
+
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+class Result extends Component {
+  render() {
+    const { result } = this.props
+    console.log(result);
+    return (
+      <>
+        <h1>{result}</h1>
+      </>
+    )
+  }
+}
+
+const mapStateToProps = (state) => ({ result: state.result });
+
+export default connect(mapStateToProps, null)(Result);
+
+```
+
+```js 
+// src/action.js
+
+export const SEND_RESULT = 'SEND_RESULT';
+
+export const sendResult = (result) => ({
+  type: SEND_RESULT,
+  result,
+});
+
+```
+
+```js
+// src/reducer.js
+
+import { SEND_RESULT } from './action.js'
+
+const INITIAL_STATE = { result: 0, };
+
+function resultReducer(state = INITIAL_STATE, action) {
+  switch (action.type) {
+    case SEND_RESULT:
+      return {...state, result: action.result};
+    default:
+      return state;
+  }
+}
+
+export default resultReducer;
+
+```
+
+```js
+// src/Calculator.js
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -331,34 +437,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(null, mapDispatchToProps)(Calculator);
-
-```
-
-```js
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
-class Result extends Component {
-  render() {
-    const { result } = this.props
-    console.log(result);
-    return (
-      <>
-        <h1>{result}</h1>
-      </>
-    )
-  }
-}
-
-const mapStateToProps = (state) => ({ result: state.result });
-
-export default connect(mapStateToProps, null)(Result);
-
-```
-
-Ao final de todas essas etapas, seu código deve ficar assim:
-
-```js
 
 ```
 
