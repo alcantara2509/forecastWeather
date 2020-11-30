@@ -38,14 +38,14 @@ npm install --save redux react-redux
 
 ```
 
-O React Redux é uma biblioteca que faz a conexão entre o React e o Redux.
+O React-Redux é uma biblioteca que faz a conexão entre o React e o Redux.
 
 
 ## Fluxo de dados no Redux
 
 Você sabe todas as etapas do Redux? No infográfico abaixo, mostramos como funciona o fluxo de dados nessa ferramenta.
 
-[Infográfico]
+![Fluxo do Redux](https://raw.githubusercontent.com/alcantara2509/forecastWeather/master/src/images/earth.png)
 
 Para começar, precisamos criar um Store. Ele é um grande objeto JavaScript que armazena todos os estados da aplicação.
 
