@@ -1,4 +1,4 @@
-[](https://raw.githubusercontent.com/alcantara2509/forecastWeather/master/forecast-img-reader.png)
+![](https://raw.githubusercontent.com/alcantara2509/forecastWeather/master/forecast-img-reader.png)
 
 # Getting Started with Create React App
 
